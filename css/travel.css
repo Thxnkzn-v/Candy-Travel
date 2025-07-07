@@ -85,6 +85,7 @@ footer {
 }
 
 /* ขนาดมือถือ */
+
 @media (max-width: 480px) {
   .button-list {
     max-height: 36px;
@@ -110,8 +111,4 @@ footer {
   background-color: rgb(255, 0, 255);
 }
 
-
 /* ข้อมูล */
-
-
-

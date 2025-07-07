@@ -1,7 +1,7 @@
-// เมนู
+// ระบบค้นหา
 
-const allButtons = [
-  { name: "กรุงเทพ", link: "1.html" },
+const provinces = [
+  { name: "กรุงเทพมหานคร", link: "1.html" },
   { name: "กระบี่", link: "2.html" },
   { name: "กาญจนบุรี", link: "3.html" },
   { name: "กาฬสินธุ์", link: "4.html" },
@@ -77,57 +77,44 @@ const allButtons = [
   { name: "อุตรดิตถ์", link: "74.html" },
   { name: "อุทัยธานี", link: "75.html" },
   { name: "อุบลราชธานี", link: "76.html" },
-  { name: "ยะลา", link: "77.html" }
+  { name: "ยะลา", link: "77.html" },
 ];
 
-const buttonList = document.getElementById('buttonList');
-const toggleBtn = document.getElementById('toggleBtn');
-let expanded = false;
+const input = document.getElementById("searchInput");
+const list = document.getElementById("provinceList");
 
-function renderButtons() {
-  buttonList.innerHTML = '';
-  allButtons.forEach(({ name, link }) => {
-    const a = document.createElement('a');
-    a.textContent = name;
-    a.href = link;
-    a.className = 'province-button';
-    buttonList.appendChild(a);
-  });
-}
+function renderProvinces(filter = "") {
+  list.innerHTML = "";
 
+  const filtered = provinces.filter(province =>
+    province.name.includes(filter)
+  );
 
-function renderCollapsed() {
-  buttonList.innerHTML = '';
-  const isMobile = window.innerWidth <= 480;
-  const btnCount = isMobile ? 3 : 5;
-  allButtons.slice(0, btnCount).forEach(({ name, link }) => {
-    const a = document.createElement('a');
-    a.textContent = name;
-    a.href = link;
-    a.className = 'province-button';
-    buttonList.appendChild(a);
-  });
-}
-
-
-toggleBtn.addEventListener('click', () => {
-  expanded = !expanded;
-  if (expanded) {
-    renderButtons();
-    buttonList.classList.add('expanded');
-    toggleBtn.textContent = "ย่อกลับ";
+  if (filtered.length > 0 && filter !== "") {
+    list.classList.add("show"); // แสดง dropdown
   } else {
-    renderCollapsed();
-    buttonList.classList.remove('expanded');
-    toggleBtn.textContent = "ดูทั้งหมด";
+    list.classList.remove("show"); // ซ่อน dropdown
+  }
+
+  filtered.forEach(province => {
+    const li = document.createElement("li");
+    const a = document.createElement("a");
+    a.href = province.link;
+    a.textContent = province.name;
+    li.appendChild(a);
+    list.appendChild(li);
+  });
+}
+
+input.addEventListener("input", () => {
+  renderProvinces(input.value.trim());
+});
+
+// เมื่อคลิกนอกช่องค้นหา → ปิด dropdown
+document.addEventListener("click", (e) => {
+  if (!document.querySelector(".search-bar").contains(e.target)) {
+    list.classList.remove("show");
   }
 });
 
-window.addEventListener('resize', () => {
-  if (!expanded) {
-    renderCollapsed();
-  }
-});
-
-renderCollapsed();
-
+renderProvinces();
