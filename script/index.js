@@ -120,36 +120,36 @@ renderProvinces();
 
 // สไล
 
-const container = document.querySelector('.travel-container');
-const btnLeft = document.getElementById('scrollLeft');
-const btnRight = document.getElementById('scrollRight');
-
 function getScrollAmount() {
-  if (window.innerWidth <= 600) {
-    return window.innerWidth;
-  } else {
-    return 220 + 20;
-  }
+  return window.innerWidth <= 600 ? window.innerWidth : 240; // 220px + gap
 }
 
-btnLeft.addEventListener('click', () => {
-  container.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
-});
+function initScrollSystem(containerId, leftBtnId, rightBtnId) {
+  const container = document.getElementById(containerId);
+  const btnLeft = document.getElementById(leftBtnId);
+  const btnRight = document.getElementById(rightBtnId);
 
-btnRight.addEventListener('click', () => {
-  container.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
-});
+  if (!container || !btnLeft || !btnRight) return;
 
-setInterval(() => {
-  const scrollAmount = getScrollAmount();
-  if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 1) {
-    container.scrollTo({ left: 0, behavior: 'smooth' });
-  } else {
-    container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-  }
-}, 3000);
+  btnLeft.addEventListener('click', () => {
+    container.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+  });
 
-window.addEventListener('resize', () => {
+  btnRight.addEventListener('click', () => {
+    container.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+  });
 
-});
+  setInterval(() => {
+    const scrollAmount = getScrollAmount();
+    if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 1) {
+      container.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+      container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  }, 3000);
+}
+
+// ✅ เรียกใช้หลายหมวดหมู่ (เพิ่มได้ตามต้องการ)
+initScrollSystem("container1", "scrollLeft1", "scrollRight1");
+initScrollSystem("container2", "scrollLeft2", "scrollRight2");
 
