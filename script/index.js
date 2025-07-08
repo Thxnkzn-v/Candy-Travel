@@ -91,9 +91,9 @@ function renderProvinces(filter = "") {
   );
 
   if (filtered.length > 0 && filter !== "") {
-    list.classList.add("show"); // แสดง dropdown
+    list.classList.add("show");
   } else {
-    list.classList.remove("show"); // ซ่อน dropdown
+    list.classList.remove("show");
   }
 
   filtered.forEach(province => {
@@ -110,7 +110,6 @@ input.addEventListener("input", () => {
   renderProvinces(input.value.trim());
 });
 
-// เมื่อคลิกนอกช่องค้นหา → ปิด dropdown
 document.addEventListener("click", (e) => {
   if (!document.querySelector(".search-bar").contains(e.target)) {
     list.classList.remove("show");
@@ -118,3 +117,39 @@ document.addEventListener("click", (e) => {
 });
 
 renderProvinces();
+
+// สไล
+
+const container = document.querySelector('.travel-container');
+const btnLeft = document.getElementById('scrollLeft');
+const btnRight = document.getElementById('scrollRight');
+
+function getScrollAmount() {
+  if (window.innerWidth <= 600) {
+    return window.innerWidth;
+  } else {
+    return 220 + 20;
+  }
+}
+
+btnLeft.addEventListener('click', () => {
+  container.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+});
+
+btnRight.addEventListener('click', () => {
+  container.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+});
+
+setInterval(() => {
+  const scrollAmount = getScrollAmount();
+  if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 1) {
+    container.scrollTo({ left: 0, behavior: 'smooth' });
+  } else {
+    container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  }
+}, 3000);
+
+window.addEventListener('resize', () => {
+
+});
+

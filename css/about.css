@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Archivo", "Josefin Sans", Arial, sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: #f9f9f9;
+}
+
+/* หัวเว็บ */
+
+header {
+  position: relative;
+  padding: 0 2rem;
+  background-color: rgb(255, 200, 255);
+}
+
+/* หน้าเว็บ */
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 40px;
+}
+
+footer {
+  background-color: rgb(255, 200, 255);
+  color: white;
+  padding: 10px;
+  text-align: center;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+
+/* โลโก้ */
+
+.logo-text {
+  margin-bottom: 1rem;
+}
+
+.logo-text .logo-text-a {
+  font-size: 50px;
+  color: rgb(255, 200, 255);
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* โลโก้ ขนาดมือถือ */
+
+@media(max-width: 800px) {
+  .logo-text .logo-text-a {
+    font-size: 35px;
+  }
+}
