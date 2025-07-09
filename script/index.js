@@ -152,4 +152,4 @@ function initScrollSystem(containerId, leftBtnId, rightBtnId) {
 // ✅ เรียกใช้หลายหมวดหมู่ (เพิ่มได้ตามต้องการ)
 initScrollSystem("container1", "scrollLeft1", "scrollRight1");
 initScrollSystem("container2", "scrollLeft2", "scrollRight2");
-
+initScrollSystem("container3", "scrollLeft3", "scrollRight3");
